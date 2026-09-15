@@ -264,6 +264,8 @@ subjects_set = [s.strip() for s in subjects.split(",")]
 ```
 
 ---
+## output
+![Program output](output.png)
 
 ## 🚀 Future Improvements
 
