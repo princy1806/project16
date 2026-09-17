@@ -15,7 +15,7 @@ while True:
     choice = int(input("Enter your choice: "))
     print()
     if choice==1:
-        student_id = int(input("Student ID: "))
+        student_id = int(input("Student_id: "))
         name = input("Name: ")
         age = int(input("Age: "))
         grade = input("Grade: ")
@@ -27,20 +27,21 @@ while True:
         for subject in subjects:
             subjects_set.add(subject.strip())
 
-        
-        student = {
-            "student_id": student_id,
-            "name": name,
-            "age": age,
-            "grade": grade,
-            "subjects": subjects,
-            
-        }
-
          # tuple for student id and dob(date of birth)
         std_info=(student_id, date_of_birth)
 
+        student = {
+            "name": name,
+            "age": age,
+            "grade": grade,
+            "subjects": subjects_set,
+            "info": std_info
+            
+        }
+
         student_list.append(student)
+
+        
         
         print()
 
@@ -50,8 +51,7 @@ while True:
     elif choice==2:
         print("--- Display All Students ---")
         for student in student_list:
-            print(f" student_id: {student['student_id']} |name: {student['name']} | age: {student['age']} | grade: {student['grade']} | subjects: {", ".join(student["subjects"])} ")
-
+            print(f"Student_id: {student['info'][0]} | Name: {student['name']} | Age: {student['age']} | Grade: {student['grade']} | Date of birth: {student['info'][1]} |Subjects: {student['subjects']}")  
         print()
 
 
@@ -59,7 +59,7 @@ while True:
         print("--- Update Student Information ---")
         student_id = int(input("Enter Student ID to update: "))
         for student in student_list:
-            if student["student_id"] == student_id:
+            if student["info"][0] == student_id:
                 
                 print("1. Enter new name: ")
                 print("2. Enter new age: ")
@@ -73,50 +73,50 @@ while True:
                     print("Student's name updated successfully!")
                     break
                 
+                
                 if choice==2:
                     new_age = int(input("Enter new age: "))
                     student["age"]=new_age
                     print("Student's age updated successfully!")
                     break
+                
                
                 if choice==3:
                      new_grade = input("Enter new grade: ")
                      student["grade"]=new_grade
                      print("Student's grade updated successfully!")
                      break
+                
                      
                
                 if choice==4:
                      new_subjects = input("Enter new subjects: ")
+                     new_subjects= new_subjects.split(",")
                      student["subjects"]=new_subjects
                      print("Student's subjects updated successfully!")
                      break
-
-           
-            print()
-            break
+                
+            
         else:
             print("Student ID isn't found.")      
-            print() 
+        print() 
            
 
     elif choice==4:
-        print("--- Delete Student ---")       
-        student_id = int(input("Enter Student ID to delete: "))
+        print(" ---Delete Student--- ")
+        student_id = int(input("Enter student id to delete student: "))
         for student in student_list:
-            if student["student_id"] == student_id:
+            if student["info"][0]==student_id:
                 student_list.remove(student)
-                print()
-                print("Student deleted successfully!")
-                print()
+                
+                print("Student ID deleted Successfully!")
                 break
         else:
-            print("Student ID isn't found.")  
-            print()
-           
-
+            print("Student ID isn't found")
+        print()        
+                
     elif choice==5:
-        print("Display Subjects offered")
+        print("--- Display Subjects offered ---")
         s = set()
         for std in student_list:
             for subject in std["subjects"]:
@@ -125,7 +125,6 @@ while True:
                 print(subject)
         print()
         
-
     elif choice==6:
         print("Exiting the program. Goodbye!")
         break
